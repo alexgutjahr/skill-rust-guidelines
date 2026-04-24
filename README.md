@@ -32,6 +32,8 @@ ln -s ~/some/path/skill-rust-guidelines ~/.claude/skills/rust-guidelines
 
 Restart your Claude Code session and it will appear in the available-skills list.
 
+**No setup step required.** The 48 guidelines are already committed to the repo — clone and the skill is ready to use. `references/regenerate.sh` is only needed when you want to refresh the content from upstream (see "Refreshing from upstream" below).
+
 ### Other agent harnesses
 
 The skill follows the [agentskills.io specification](https://agentskills.io/specification) — `SKILL.md` with YAML frontmatter (`name`, `description`) plus a `references/` directory. Any harness that loads skills from a directory should work: point it at `skill-rust-guidelines/` as the skill root.
@@ -62,10 +64,12 @@ See [`references/report-template.md`](references/report-template.md) for the exa
 .
 ├── SKILL.md                      # Entry point (≤550 words, what Claude loads first)
 ├── README.md                     # This file
+├── LICENSE                       # Apache License 2.0
+├── NOTICE                        # Attribution for upstream content
 ├── .gitignore
 └── references/
     ├── UPSTREAM.md               # Provenance + refresh procedure
-    ├── _regenerate.sh            # Regenerates all references + checklist from upstream
+    ├── regenerate.sh             # Regenerates all references + checklist from upstream (maintainers only)
     ├── checklist.md              # 48-row flat triage table (M-ID, title, version, applies-to, rationale)
     ├── report-template.md        # Findings report format
     ├── whole-codebase-workflow.md # Parallel-dispatch procedure for workspaces
@@ -76,15 +80,15 @@ Reference files are mirrored **verbatim** from the upstream `src/guidelines/<cat
 
 ## Refreshing from upstream
 
-When Microsoft updates their guidelines:
+> Only needed for maintainers when Microsoft updates the guidelines. **End users do not need to run this** — the generated references are committed.
 
 ```bash
 # Fetch upstream at its latest HEAD
 rm -rf /tmp/rust-guidelines-upstream
 git clone --depth 1 https://github.com/microsoft/rust-guidelines /tmp/rust-guidelines-upstream
 
-# Regenerate references + checklist
-bash references/_regenerate.sh
+# Regenerate references + checklist (idempotent — safe to re-run)
+bash references/regenerate.sh
 
 # Update references/UPSTREAM.md with the new SHA + date
 # Review the diff, then commit
@@ -103,12 +107,12 @@ See [`references/UPSTREAM.md`](references/UPSTREAM.md) for full detail.
 
 ## Attribution & license
 
-This skill mirrors content from [microsoft/rust-guidelines](https://github.com/microsoft/rust-guidelines), licensed under the [MIT License](https://github.com/microsoft/rust-guidelines/blob/main/LICENSE). This skill is independently authored and is **not** an official Microsoft project.
+This skill's own work (the `SKILL.md` workflow, `regenerate.sh`, `report-template.md`, `whole-codebase-workflow.md`, `README.md`, `UPSTREAM.md`) is licensed under the [Apache License 2.0](LICENSE). You can use, modify, and redistribute freely — see [`NOTICE`](NOTICE) for attributions.
 
-The skill's own code (the `SKILL.md` workflow, `_regenerate.sh`, `report-template.md`, `whole-codebase-workflow.md`) is released under the [MIT License](LICENSE).
+The guideline content under `references/` (the 11 category files and the rows of `checklist.md` derived from them) is mirrored from [microsoft/rust-guidelines](https://github.com/microsoft/rust-guidelines), which is licensed under the [MIT License](https://github.com/microsoft/rust-guidelines/blob/main/LICENSE). This skill is **not** an official Microsoft project.
 
 ## Contributing
 
 Improvements to the skill workflow, the report template, or the pre-flight filter are welcome — open an issue or PR.
 
-For upstream guideline content, file issues against [microsoft/rust-guidelines](https://github.com/microsoft/rust-guidelines/issues) directly. Changes there flow into this skill via `_regenerate.sh`.
+For upstream guideline content, file issues against [microsoft/rust-guidelines](https://github.com/microsoft/rust-guidelines/issues) directly. Changes there flow into this skill via `regenerate.sh`.

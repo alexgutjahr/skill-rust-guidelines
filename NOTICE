@@ -1,0 +1,20 @@
+skill-rust-guidelines
+Copyright 2026 Alex Gutjahr
+
+This product includes content mirrored from:
+
+  microsoft/rust-guidelines
+  https://github.com/microsoft/rust-guidelines
+  Copyright Microsoft Corporation
+  Licensed under the MIT License
+
+The mirrored content appears under `references/` (category markdown files,
+and rows of `checklist.md` derived from them). See references/UPSTREAM.md
+for the pinned commit and refresh procedure. The upstream license file is
+at https://github.com/microsoft/rust-guidelines/blob/main/LICENSE.
+
+All other code and documentation in this repository (SKILL.md, README.md,
+references/regenerate.sh, references/report-template.md,
+references/whole-codebase-workflow.md, references/UPSTREAM.md) is
+original work and is licensed under the Apache License, Version 2.0.
+See LICENSE for the full license text.

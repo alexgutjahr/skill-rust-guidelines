@@ -30,7 +30,7 @@ for upstream in "${!MAP[@]}"; do
 
   if [ ! -d "$catdir" ]; then
     echo "ERROR: missing upstream directory: $catdir" >&2
-    echo "      → adjust the MAP in _regenerate.sh to match actual upstream layout" >&2
+    echo "      → adjust the MAP in regenerate.sh to match actual upstream layout" >&2
     exit 1
   fi
 
@@ -155,7 +155,7 @@ declare -A APPLIES=(
   echo ""
   echo "---"
   echo ""
-  echo "**Total: 48 guidelines** — if this count is wrong, run \`_regenerate.sh\` and rebuild the checklist."
+  echo "**Total: 48 guidelines** — if this count is wrong, run \`regenerate.sh\` and rebuild the checklist."
 } > "$OUT"
 
 echo "Wrote $OUT"
